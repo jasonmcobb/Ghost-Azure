@@ -117,8 +117,7 @@
             "mail__options__auth__pass": "[parameters('Email Password')]",
             "mail__from": "[parameters('Email From Address')]",
             "WEBSITE_NODE_DEFAULT_VERSION": "~12",
-            "SCM_COMMAND_IDLE_TIMEOUT": "300",
-            "APPINSIGHTS_INSTRUMENTATION_KEY": "[reference(concat('Microsoft.Insights/components/', variables('appInsightsName'))).InstrumentationKey]"
+            "SCM_COMMAND_IDLE_TIMEOUT": "300"
           }
         },
         {
@@ -137,23 +136,6 @@
           }
         }
       ]
-    },
-    {
-      "name": "[variables('appInsightsName')]",
-      "type": "Microsoft.Insights/components",
-      "location": "[parameters('siteLocation')]",
-      "apiVersion": "2020-02-02-preview",
-      "condition": "[parameters('Deploy App Insights')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/sites', parameters('siteName'))]"
-      ],
-      "tags": {
-        "displayName": "[variables('appInsightsName')]"
-      },
-      "properties": {
-        "ApplicationId": "[resourceId('Microsoft.Web/sites', parameters('siteName'))]",
-        "Application_Type": "Node.JS"
-      }
     }
   ]
 }
